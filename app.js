@@ -1,6 +1,7 @@
 const linkGrid = document.querySelector(".link-grid");
 const filters = document.querySelector(".filters");
 const search = document.querySelector(".search");
+const searchClear = document.querySelector(".search-clear");
 
 let activeCategory = "all";
 let links = [];
@@ -136,7 +137,21 @@ linkGrid.addEventListener(
 	true
 );
 
-search.addEventListener("input", render);
+const syncSearchClear = () => {
+	searchClear.hidden = search.value.length === 0;
+};
+
+search.addEventListener("input", () => {
+	syncSearchClear();
+	render();
+});
+
+searchClear.addEventListener("click", () => {
+	search.value = "";
+	syncSearchClear();
+	search.focus();
+	render();
+});
 
 const modal = document.querySelector(".modal");
 const aboutLink = document.querySelector(".about-link");
