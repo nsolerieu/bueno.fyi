@@ -138,7 +138,10 @@ linkGrid.addEventListener(
 );
 
 const syncSearchClear = () => {
-	searchClear.hidden = search.value.length === 0;
+	const hasSearchValue = search.value.length > 0;
+
+	searchClear.hidden = !hasSearchValue;
+	aboutLink.hidden = hasSearchValue;
 };
 
 search.addEventListener("input", () => {
